@@ -7,6 +7,10 @@ function initialize()
   var life=4;
   mov.innerHTML=count;
   liv.innerHTML=life;
+  mod1=document.getElementById("initialModal");
+}
+function closeModal() {
+    mod1.classList.add("fade");
 }
 // Enemies our player must avoid
 var Enemy = function() {

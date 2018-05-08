@@ -1,3 +1,27 @@
 body {
     text-align: center;
 }
+
+.fade {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.modal-dialog {
+  margin: 15% auto;
+  padding: 20px;
+  width: 70%;
+}
+
+.modal-content{
+  text-align: center;
+}
+
+.fade:target {
+  visibility: visible;
+}
+
+.show {
+  visibility: visible ;
+  opacity: 100 ;
+}
