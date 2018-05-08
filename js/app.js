@@ -1,3 +1,13 @@
+document.body.onLoad = initialize();
+
+function initialize()
+{ var mov=document.getElementById("moves");
+  var liv=document.getElementById("lives");
+  var count=0;
+  var life=4;
+  mov.innerHTML=count;
+  liv.innerHTML=life;
+}
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
