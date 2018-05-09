@@ -1,16 +1,17 @@
 document.body.onLoad = initialize();
 var imag;
 var count;
+var life;
 var mov=document.getElementById("moves");
+var liv=document.getElementById("lives");
 function initialize()
-{ var liv=document.getElementById("lives");
-  var life=4;
-  liv.innerHTML=life;
-  mod1=document.getElementById("initialModal");
+{  mod1=document.getElementById("initialModal");
 }
 function closeModal() {
     count=0;
+    life=4;
     mov.innerHTML=count;
+    liv.innerHTML=life;
     mod1.classList.add("fade");
     if(document.getElementById("p1").checked)imag="char-boy.png";
     else if(document.getElementById("p2").checked)imag="char-cat-girl.png";
@@ -42,8 +43,12 @@ Enemy.prototype.update = function(dt) {
     if(this.x>505){
     this.x = -20;
     var r = Math.floor(Math.random() * 600)
-    this.speed = 200 + r;
+    this.speed = 180 + r;
 }
+if (player.x < this.x + 65 && player.x + 30 > this.x - 30 && player.y < this.y + 40 && 50 + player.y > this.y) {
+    player.reset();
+}
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -59,11 +64,7 @@ var Player = function(x,y) {
   this.y=y;
   this.sprite = 'images/char-boy.png';
 };
-/*
-Player.prototype.changePlayer = function(imag) {
-  ctx.clearRect(20,20,100,50);
-  this.sprite='images/char-cat-girl.png';
-}*/
+
 Player.prototype.update = function() {
   if(this.x<0){
       this.x=0;
@@ -105,6 +106,30 @@ Player.prototype.handleInput = function(key) {
 mov.innerHTML = count;
 };
 
+Player.prototype.win = function() {
+  life+=1;
+  liv.innerHTML=life;
+  this.x=200;
+  this.y=400;
+  alert("CONGRATULATIONS !! \n Well Done, you got an extra life \n Try to get as many lives as you can \n 10+ Lives - You're an amateur \n 20+ Lives - you're a challenging player \n 35+ Lives - you're a legend \n You have "+life+" Lives in "+count+" moves");
+};
+
+Player.prototype.reset = function() {
+  life-=1;
+  if(life==0){alert("0 LIVES - GAME OVER !!!!!!!! \n You played "+count+" Moves \n Try Again");
+              life = 4;
+              this.x=200;
+              this.y=400;
+              liv.innerHTML=life;
+              count=0;
+              mov.innerHTML=count;
+              }
+  else {
+  liv.innerHTML=life;
+this.x=200;
+this.y=400;}
+
+}
 // Now instantiate your objects.
 var allEnemies=[]
 let espeed=[];
