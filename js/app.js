@@ -1,15 +1,16 @@
 document.body.onLoad = initialize();
 var imag;
+var count;
+var mov=document.getElementById("moves");
 function initialize()
-{ var mov=document.getElementById("moves");
-  var liv=document.getElementById("lives");
-  var count=0;
+{ var liv=document.getElementById("lives");
   var life=4;
-  mov.innerHTML=count;
   liv.innerHTML=life;
   mod1=document.getElementById("initialModal");
 }
 function closeModal() {
+    count=0;
+    mov.innerHTML=count;
     mod1.classList.add("fade");
     if(document.getElementById("p1").checked)imag="char-boy.png";
     else if(document.getElementById("p2").checked)imag="char-cat-girl.png";
@@ -17,9 +18,7 @@ function closeModal() {
     else if(document.getElementById("p4").checked)imag="char-pink-girl.png";
     else if(document.getElementById("p5").checked)imag="char-princess-girl.png";
     else return 0;
-  /*  player.changePlayer("char-horn-girl.png");
-    player.render();*/
-}
+  }
 // Enemies our player must avoid
 var Enemy = function(speed,x,y) {
     this.x=x;
@@ -86,22 +85,26 @@ Player.prototype.render = function() {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
 
+/*Player.prototype.reset() {
+
+}*/
 Player.prototype.handleInput = function(key) {
   if(key == 'left'){
     this.x = this.x - 90;
-    count = count + 1;
+    count+= 1;
 } else if(key == 'right') {
     this.x = this.x + 90;
-    count = count + 1;
+    count+= 1;
 } else if(key == 'up') {
     this.y = this.y - 90;
-    count = count + 1;
+    count+= 1;
 } else if(key == 'down'){
     this.y = this.y + 90;
-    count = count + 1;
+    count+= 1;
 }
-move.innerHTML = count;
+mov.innerHTML = count;
 };
+
 // Now instantiate your objects.
 var allEnemies=[]
 let espeed=[];
