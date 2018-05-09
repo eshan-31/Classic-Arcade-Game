@@ -1,10 +1,10 @@
 document.body.onLoad = initialize();
 var imag;
-var count;
-var life;
+var count; //for number of moves
+var life; //for number of lives
 var mov=document.getElementById("moves");
 var liv=document.getElementById("lives");
-function initialize()
+function initialize() //for modal
 {  mod1=document.getElementById("initialModal");
 }
 function closeModal() {
@@ -40,15 +40,14 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + this.speed*dt;
-    if(this.x>505){
-    this.x = -20;
-    var r = Math.floor(Math.random() * 600)
+    if(this.x>505){ //when the emnemy is out of canvas
+    this.x = -30;
+    var r = Math.floor(Math.random() * 600) //random speed increase
     this.speed = 180 + r;
 }
-if (player.x < this.x + 65 && player.x + 30 > this.x - 30 && player.y < this.y + 40 && 50 + player.y > this.y) {
-    player.reset();
+if (player.x < this.x + 65 && player.x + 30 > this.x - 30 && player.y < this.y + 40 && 50 + player.y > this.y) { //for collision
+    player.startpos();
 }
-
 };
 
 // Draw the enemy on the screen, required method for game
@@ -76,7 +75,6 @@ Player.prototype.update = function() {
   if(this.y > 400){
       this.y = 400;
   }
-  /*Player reaches water*/
   if(this.y < -10){
       this.win();
   }
@@ -86,10 +84,7 @@ Player.prototype.render = function() {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
 
-/*Player.prototype.reset() {
-
-}*/
-Player.prototype.handleInput = function(key) {
+Player.prototype.handleInput = function(key) { //for moving the player accross screen ( blockto block)
   if(key == 'left'){
     this.x = this.x - 90;
     count+= 1;
@@ -106,6 +101,7 @@ Player.prototype.handleInput = function(key) {
 mov.innerHTML = count;
 };
 
+//when a player wins
 Player.prototype.win = function() {
   life+=1;
   liv.innerHTML=life;
@@ -114,7 +110,8 @@ Player.prototype.win = function() {
   alert("CONGRATULATIONS !! \n Well Done, you got an extra life \n Try to get as many lives as you can \n 10+ Lives - You're an amateur \n 20+ Lives - you're a challenging player \n 35+ Lives - you're a legend \n You have "+life+" Lives in "+count+" moves");
 };
 
-Player.prototype.reset = function() {
+//after collision
+Player.prototype.startpos = function() {
   life-=1;
   if(life==0){alert("0 LIVES - GAME OVER !!!!!!!! \n You played "+count+" Moves \n Try Again");
               life = 4;
@@ -129,7 +126,8 @@ Player.prototype.reset = function() {
 this.x=200;
 this.y=400;}
 
-}
+};
+
 // Now instantiate your objects.
 var allEnemies=[]
 let espeed=[];
