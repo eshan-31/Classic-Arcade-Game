@@ -87,7 +87,18 @@ Player.prototype.render = function() {
   };
 
 Player.prototype.handleInput = function(key) {
-
+  if(key == 'left'){
+    this.x = this.x - 90;
+    count = count + 1;
+} else if(key == 'right') {
+    this.x = this.x + 90;
+    count = count + 1;
+} else if(key == 'up') {
+    this.y = this.y - 90;
+    count = count + 1;
+} else if(key == 'down'){
+    this.y = this.y + 90;
+    count = count + 1;
 }
 move.innerHTML = count;
 };
