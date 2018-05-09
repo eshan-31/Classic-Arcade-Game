@@ -1,5 +1,5 @@
 document.body.onLoad = initialize();
-
+var imag;
 function initialize()
 { var mov=document.getElementById("moves");
   var liv=document.getElementById("lives");
@@ -11,9 +11,18 @@ function initialize()
 }
 function closeModal() {
     mod1.classList.add("fade");
+    if(document.getElementById("p1").checked)imag="char-boy.png";
+    else if(document.getElementById("p2").checked)imag="char-cat-girl.png";
+    else if(document.getElementById("p3").checked)imag="char-horn-girl.png";
+    else if(document.getElementById("p4").checked)imag="char-pink-girl.png";
+    else if(document.getElementById("p5").checked)imag="char-princess-girl.png";
+    else return 0;
 }
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(speed,x,y) {
+    this.x=x;
+    this.y=y;
+    this.speed=speed;
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -28,6 +37,12 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x = this.x + this.speed*dt;
+    if(this.x>505){
+    this.x = -20;
+    var r = Math.floor(Math.random() * 600)
+    this.speed = 200 + r;
+}
 };
 
 // Draw the enemy on the screen, required method for game
@@ -38,9 +53,18 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function() {
+
+};
+/*
+Player.prototype.changePlayer = function(imag) {
+  ctx.clearRect(20,20,100,50);
+  this.sprite='images/char-cat-girl.png';
+}*/
 
 
 // Now instantiate your objects.
+
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
