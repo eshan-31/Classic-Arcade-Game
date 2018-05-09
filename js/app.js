@@ -60,7 +60,11 @@ var Player = function(x,y) {
   this.y=y;
   this.sprite = 'images/char-boy.png';
 };
-
+/*
+Player.prototype.changePlayer = function(imag) {
+  ctx.clearRect(20,20,100,50);
+  this.sprite='images/char-cat-girl.png';
+}*/
 Player.prototype.update = function() {
   if(this.x<0){
       this.x=0;
@@ -84,9 +88,22 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(key) {
 
+}
+move.innerHTML = count;
 };
 // Now instantiate your objects.
+var allEnemies=[]
+let espeed=[];
+for(let i=0; i<4; i++){
+  espeed[i]=Math.floor(Math.random()*200);
+}
+bug1 = new Enemy(espeed[0],0,60);
+bug2 = new Enemy(espeed[1],0,145);
+bug3 = new Enemy(espeed[2],0,230);
+bug4 = new Enemy(espeed[3],0,60);
+allEnemies=[bug1,bug2,bug3,bug4];
 
+var player = new Player(200, 400);
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
