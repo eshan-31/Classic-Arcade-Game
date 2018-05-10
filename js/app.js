@@ -14,12 +14,14 @@ function closeModal() {
     liv.innerHTML=life;
     mod1.classList.add("fade");
     if(document.getElementById("p1").checked)imag="char-boy.png";
-    else if(document.getElementById("p2").checked)imag="char-cat-girl.png";
-    else if(document.getElementById("p3").checked)imag="char-horn-girl.png";
-    else if(document.getElementById("p4").checked)imag="char-pink-girl.png";
-    else if(document.getElementById("p5").checked)imag="char-princess-girl.png";
+    else if(document.getElementById("p2").checked)imag="images/char-cat-girl.png";
+    else if(document.getElementById("p3").checked)imag="images/char-horn-girl.png";
+    else if(document.getElementById("p4").checked)imag="images/char-pink-girl.png";
+    else if(document.getElementById("p5").checked)imag="images/char-princess-girl.png";
     else return 0;
+    player.change(imag);
   }
+
 // Enemies our player must avoid
 var Enemy = function(speed,x,y) {
     this.x=x;
@@ -41,8 +43,8 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + this.speed*dt;
     if(this.x>505){ //when the emnemy is out of canvas
-    this.x = -30;
-    var r = Math.floor(Math.random() * 600) //random speed increase
+    this.x = -40;
+    var r = Math.floor(Math.random() * 400) //random speed increase
     this.speed = 180 + r;
 }
 if (player.x < this.x + 65 && player.x + 30 > this.x - 30 && player.y < this.y + 40 && 50 + player.y > this.y) { //for collision
@@ -79,6 +81,12 @@ Player.prototype.update = function() {
       this.win();
   }
 };
+
+Player.prototype.change = function(imag) {
+  this.sprite=imag;
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+}
 
 Player.prototype.render = function() {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
